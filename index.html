@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,11 +8,23 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 </head>
+
 <body>
     <div id="game-container">
         <div id="ui-layer">
             <div id="score-board">Score: <span id="score">0</span></div>
             <div id="warning-overlay"></div>
+            <div id="start-screen">
+                <h1>Balancing Hero</h1>
+                <div class="instructions">
+                    <p>⚖️ <strong>Balance the Beam!</strong></p>
+                    <p>🎮 <strong>Controls:</strong> Arrow Keys or Buttons</p>
+                    <p>🧱 <strong>Catch Blocks</strong> to score points</p>
+                    <p>💣 <strong>Avoid Bombs!</strong></p>
+                    <p>🎨 <strong>Match Colors</strong> to merge blocks</p>
+                </div>
+                <button id="start-btn">GAME START</button>
+            </div>
             <div id="game-over-screen" class="hidden">
                 <h1>GAME OVER</h1>
                 <p>Final Score: <span id="final-score">0</span></p>
@@ -26,4 +39,5 @@
     </div>
     <script src="game.js"></script>
 </body>
+
 </html>

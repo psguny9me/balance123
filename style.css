@@ -6,7 +6,8 @@ body {
     overflow: hidden;
     background-color: #222;
     font-family: 'Roboto', sans-serif;
-    touch-action: none; /* Prevent pull-to-refresh on mobile */
+    touch-action: none;
+    /* Prevent pull-to-refresh on mobile */
 }
 
 #game-container {
@@ -20,7 +21,7 @@ body {
 
 canvas {
     display: block;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 #ui-layer {
@@ -29,7 +30,8 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Let clicks pass through to canvas/buttons */
+    pointer-events: none;
+    /* Let clicks pass through to canvas/buttons */
 }
 
 #score-board {
@@ -61,11 +63,18 @@ canvas {
 }
 
 @keyframes pulse {
-    from { opacity: 0.5; }
-    to { opacity: 1.0; }
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1.0;
+    }
 }
 
-#game-over-screen {
+/* Shared styles for screens */
+#game-over-screen,
+#start-screen {
     position: absolute;
     top: 0;
     left: 0;
@@ -81,15 +90,37 @@ canvas {
     pointer-events: auto;
 }
 
-#game-over-screen.hidden {
+#game-over-screen.hidden,
+#start-screen.hidden {
     display: none;
 }
 
-#game-over-screen h1 {
+#game-over-screen h1,
+#start-screen h1 {
     font-family: 'Black Ops One', cursive;
     font-size: 60px;
     color: #ff4444;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+#start-screen h1 {
+    color: #4CAF50;
+    /* Green for start */
+}
+
+.instructions {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: left;
+    max-width: 80%;
+}
+
+.instructions p {
+    font-size: 18px;
+    margin: 10px 0;
 }
 
 #game-over-screen p {
@@ -97,7 +128,8 @@ canvas {
     margin-bottom: 30px;
 }
 
-#restart-btn {
+#restart-btn,
+#start-btn {
     padding: 15px 40px;
     font-size: 24px;
     font-family: 'Black Ops One', cursive;
@@ -109,12 +141,14 @@ canvas {
     transition: transform 0.1s;
 }
 
-#restart-btn:hover {
+#restart-btn:hover,
+#start-btn:hover {
     transform: scale(1.05);
     background: #45a049;
 }
 
-#restart-btn:active {
+#restart-btn:active,
+#start-btn:active {
     transform: scale(0.95);
 }
 
@@ -147,9 +181,4 @@ canvas {
 
 .control-btn:active {
     background: rgba(255, 255, 255, 0.4);
-}
-
-/* Hide mobile controls on desktop if preferred, but keeping them for now as requested 'buttons on screen' */
-@media (min-width: 768px) {
-    /* Optional: make them smaller or hide if keyboard is primary */
 }

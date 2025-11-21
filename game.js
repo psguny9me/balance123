@@ -45,9 +45,13 @@ const scoreEl = document.getElementById('score');
 const finalScoreEl = document.getElementById('final-score');
 const warningOverlay = document.getElementById('warning-overlay');
 const gameOverScreen = document.getElementById('game-over-screen');
+const startScreen = document.getElementById('start-screen');
 const restartBtn = document.getElementById('restart-btn');
+const startBtn = document.getElementById('start-btn');
 
-// Initialize Game
+let isGameRunning = false;
+
+// Initialize Game (Setup Physics but don't run loop yet)
 function init() {
     // Create engine
     engine = Engine.create();
@@ -60,7 +64,7 @@ function init() {
             width: window.innerWidth,
             height: window.innerHeight,
             wireframes: false,
-            background: 'transparent' // Use CSS background
+            background: 'transparent'
         }
     });
 
@@ -70,33 +74,37 @@ function init() {
     // Create walls
     createWalls();
 
-    // Add mouse control (optional, for debugging or interaction)
+    // Add mouse control
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
         mouse: mouse,
-        constraint: {
-            stiffness: 0.2,
-            render: { visible: false }
-        }
+        constraint: { stiffness: 0.2, render: { visible: false } }
     });
     Composite.add(engine.world, mouseConstraint);
     render.mouse = mouse;
 
-    // Collision Events (Merging & Bomb)
+    // Collision Events
     Events.on(engine, 'collisionStart', handleCollisions);
 
-    // Before Update (Input & Game Logic)
+    // Before Update
     Events.on(engine, 'beforeUpdate', gameLoop);
 
-    // After Render (Custom Drawing)
+    // After Render
     Events.on(render, 'afterRender', drawCustomEffects);
 
-    // Run
+    // Run Renderer (so we can see the static scene)
     Render.run(render);
-    runner = Runner.create();
-    Runner.run(runner, engine);
 
-    // Start Spawning
+    // Create Runner but don't start it yet
+    runner = Runner.create();
+}
+
+function startGame() {
+    if (isGameRunning) return;
+    isGameRunning = true;
+
+    startScreen.classList.add('hidden');
+    Runner.run(runner, engine);
     lastSpawnTime = performance.now();
 }
 
